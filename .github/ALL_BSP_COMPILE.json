@@ -62,7 +62,6 @@
       "RTT_BSP": "others_ft32_mm32_acm32",
       "RTT_TOOL_CHAIN": "sourcery-arm",
       "SUB_RTT_BSP": [
-        "phytium/aarch32",
         "airm2m/air32f103",
         "acm32/acm32f0x0-nucleo",
         "acm32/acm32f0x0-nucleo",
@@ -136,6 +135,7 @@
         "stm32/stm32f103-fire-arbitrary",
         "stm32/stm32f103-gizwits-gokitv21",
         "stm32/stm32f103-hw100k-ibox",
+        "stm32/stm32f103-keysking-learning",
         "stm32/stm32f103-onenet-nbiot",
         "stm32/stm32f103-yf-ufun",
         "stm32/stm32f103-ys-f1pro",
@@ -228,15 +228,19 @@
         "nxp/lpc/lpc54114-lite",
         "nxp/lpc/lpc176x",
         "nxp/imx/imx6sx/cortex-a9",
+        "nxp/imx/imx6ul",
         "nxp/imx/imxrt/imxrt1052-atk-commander",
         "nxp/imx/imxrt/imxrt1052-fire-pro",
         "nxp/imx/imxrt/imxrt1052-nxp-evk",
         "nxp/imx/imxrt/imxrt1052-seeed-ArchMix",
+        "nxp/imx/imxrt/imxrt1061-forlinx-OK1061-S",
         "nxp/imx/imxrt/imxrt1060-nxp-evk",
         "nxp/imx/imxrt/imxrt1064-nxp-evk",
         "nxp/imx/imxrt/imxrt1021-nxp-evk",
+        "nxp/imx/imxrt/imxrt1170-nxp-evk",
         "nxp/mcx/mcxn/frdm-mcxn947",
         "nxp/mcx/mcxn/frdm-mcxn236",
+        "nxp/mcx/mcxc/frdm-mcxc444",
         "nxp/mcx/mcxa/frdm-mcxa153",
         "nxp/mcx/mcxa/frdm-mcxa156",
         "renesas/ebf_qi_min_6m5",
@@ -365,7 +369,6 @@
       "RTT_BSP": "aarch64",
       "RTT_TOOL_CHAIN": "sourcery-aarch64",
       "SUB_RTT_BSP": [
-        "phytium/aarch64",
         "qemu-virt64-aarch64",
         "raspberry-pi/raspi3-64",
         "raspberry-pi/raspi4-64"
@@ -455,7 +458,15 @@
       "RTT_TOOL_CHAIN": "sourcery-arm",
       "RTT_SMART_TOOL_CHAIN": "arm-linux-musleabi",
       "SUB_RTT_BSP": [
-        "qemu-vexpress-a9"
+        "qemu-vexpress-a9",
+        "nxp/imx/imx6ull-smart"
+      ]
+    },
+    {
+      "RTT_BSP": "xuantie",
+      "RTT_TOOL_CHAIN": "sourcery-Xuantie-900-gcc-elf-newlib",
+      "SUB_RTT_BSP": [
+        "xuantie/smartl/e906"
       ]
     }
   ]
