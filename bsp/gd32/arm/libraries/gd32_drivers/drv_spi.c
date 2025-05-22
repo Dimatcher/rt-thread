@@ -22,7 +22,7 @@ static struct rt_spi_bus spi_bus0;
 #ifdef BSP_USING_SPI1
 static struct rt_spi_bus spi_bus1;
 #endif
-#ifdef BSP_USING_SPI2
+#if defined(BSP_USING_SPI2) || defined(BSP_USING_SPI2_2)
 static struct rt_spi_bus spi_bus2;
 #endif
 #ifdef BSP_USING_SPI3
@@ -62,13 +62,13 @@ static const struct gd32_spi spi_bus_obj[] = {
 #if defined SOC_SERIES_GD32F4xx
         GPIO_AF_5,
 #endif
-        GPIO_PIN_12,
+        GPIO_PIN_13,
         GPIO_PIN_14,
         GPIO_PIN_15,
     },
 #endif /* BSP_USING_SPI1 */
 
-#ifdef BSP_USING_SPI2
+#if defined BSP_USING_SPI2
     {
         SPI2,
         "spi2",
@@ -82,6 +82,21 @@ static const struct gd32_spi spi_bus_obj[] = {
         GPIO_PIN_3,
         GPIO_PIN_4,
         GPIO_PIN_5,
+    },
+#elif defined(BSP_USING_SPI2_2)
+    {
+        SPI2,
+        "spi2",
+        RCU_SPI2,
+        RCU_GPIOC,
+        &spi_bus2,
+        GPIOC,
+#if defined SOC_SERIES_GD32F4xx
+        GPIO_AF_6,
+#endif
+        GPIO_PIN_10,
+        GPIO_PIN_11,
+        GPIO_PIN_12,
     },
 #endif /* BSP_USING_SPI2 */
 
