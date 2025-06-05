@@ -11,7 +11,7 @@
 
 #ifdef RT_USING_SPI
 
-#if defined(BSP_USING_SPI0) || defined(BSP_USING_SPI1) || defined(BSP_USING_SPI2) || defined(BSP_USING_SPI3) || defined(BSP_USING_SPI4)
+#if defined(BSP_USING_SPI0) || defined(BSP_USING_SPI1) || defined(BSP_USING_SPI2) || defined(BSP_USING_SPI3) || defined(BSP_USING_SPI4) || defined(BSP_USING_SPI5)
 #define LOG_TAG              "drv.spi"
 
 #include <rtdbg.h>
@@ -30,6 +30,9 @@ static struct rt_spi_bus spi_bus3;
 #endif
 #ifdef BSP_USING_SPI4
 static struct rt_spi_bus spi_bus4;
+#endif
+#ifdef BSP_USING_SPI5
+static struct rt_spi_bus spi_bus5;
 #endif
 
 static const struct gd32_spi spi_bus_obj[] = {
@@ -107,7 +110,7 @@ static const struct gd32_spi spi_bus_obj[] = {
         RCU_SPI3,
         RCU_GPIOE,
         &spi_bus3,
-        GPIOB,
+        GPIOE,
 #if defined SOC_SERIES_GD32F4xx
         GPIO_AF_5,
 #endif
@@ -131,6 +134,22 @@ static const struct gd32_spi spi_bus_obj[] = {
         GPIO_PIN_7,
         GPIO_PIN_8,
         GPIO_PIN_9,
+    },
+#endif /* BSP_USING_SPI4 */
+#ifdef BSP_USING_SPI5
+    {
+        SPI5,
+        "spi5",
+        RCU_SPI5,
+        RCU_GPIOG,
+        &spi_bus5,
+        GPIOG,
+#if defined SOC_SERIES_GD32F4xx
+        GPIO_AF_5,
+#endif
+        GPIO_PIN_13,
+        GPIO_PIN_12,
+        GPIO_PIN_14,
     }
 #endif /* BSP_USING_SPI4 */
 };
