@@ -17,7 +17,8 @@
 /* Bank1 or Bank2 */
 #define SDRAM_TARGET_BANK               1
 /* stm32h7 Bank1:0XC0000000  Bank2:0XD0000000 */
-#define SDRAM_BANK_ADDR                 ((uint32_t)0XC0000000)
+#define SDRAM_BANK0_ADDR                ((uint32_t)0xC0000000)
+#define SDRAM_BANK1_ADDR                ((uint32_t)0xD0000000)
 /* data width: 8, 16, 32 */
 #define SDRAM_DATA_WIDTH_IN_NUMBER      16
 #define SDRAM_DATA_WIDTH                EXMC_SDRAM_DATABUS_WIDTH_16B
