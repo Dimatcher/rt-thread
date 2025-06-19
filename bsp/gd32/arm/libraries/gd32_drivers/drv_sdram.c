@@ -183,8 +183,7 @@ static rt_err_t SDRAM_Initialization_Sequence(exmc_sdram_parameter_struct *hsdra
     exmc_sdram_command_config(&sdram_command_init_struct);
 
     /* step 4 : insert 10ms delay----------------------------------------------*/
-    rt_hw_us_delay(1000);
-//  rt_thread_mdelay(10);
+    rt_thread_mdelay(10);
 
     /* step 5 : configure precharge all command----------------------------------*/
     sdram_command_init_struct.command = EXMC_SDRAM_PRECHARGE_ALL;
@@ -276,13 +275,13 @@ static int SDRAM_Init(void)
     else
     {
 #if SDRAM_TARGET_BANK != 2
-        rt_kprintf("sdram bank 0 init success, mapped at 0x%X, size is %d bytes, data width is %d\r", SDRAM_BANK0_ADDR, SDRAM_SIZE, SDRAM_DATA_WIDTH);
+        LOG_I("sdram bank 0 init success, mapped at 0x%X, size is %d bytes, data width is %d", SDRAM_BANK0_ADDR, SDRAM_SIZE, SDRAM_DATA_WIDTH);
 #ifdef RT_USING_MEMHEAP_AS_HEAP
         heap_addr = SDRAM_BANK0_ADDR;
 #endif
 #endif
 #if (SDRAM_TARGET_BANK == 2) || (SDRAM_TARGET_BANK == 3)
-        rt_kprintf("sdram bank 1 init success, mapped at 0x%X, size is %d bytes, data width is %d\r", SDRAM_BANK1_ADDR, SDRAM_SIZE, SDRAM_DATA_WIDTH);
+        LOG_I("sdram bank 1 init success, mapped at 0x%X, size is %d bytes, data width is %d", SDRAM_BANK1_ADDR, SDRAM_SIZE, SDRAM_DATA_WIDTH);
 #ifdef RT_USING_MEMHEAP_AS_HEAP
         if(heap_addr == 0)
             heap_addr = SDRAM_BANK1_ADDR;
@@ -297,7 +296,7 @@ static int SDRAM_Init(void)
 
     return result;
 }
-INIT_BOARD_EXPORT(SDRAM_Init);
+INIT_DEVICE_EXPORT(SDRAM_Init);
 
 #ifdef DRV_DEBUG
 #ifdef FINSH_USING_MSH
