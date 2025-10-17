@@ -40,6 +40,11 @@ struct gd32_spi
     uint16_t sck_pin;
     uint16_t miso_pin;
     uint16_t mosi_pin;
+    uint32_t dma_periph;
+    dma_channel_enum dma_tx_channel;
+    dma_channel_enum dma_rx_channel;
+    dma_subperipheral_enum dma_sub_periph;
+    rcu_periph_enum dma_clk;
 };
 
 rt_err_t rt_hw_spi_device_attach(const char *bus_name, const char *device_name, rt_base_t cs_pin);

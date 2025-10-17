@@ -24,6 +24,7 @@ if GetDepend(['RT_USING_I2C']):
 
 if GetDepend(['RT_USING_SPI']):
     src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c']
+    src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_dma.c']
 
 if GetDepend(['RT_USING_CAN']):
     src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_can.c']
