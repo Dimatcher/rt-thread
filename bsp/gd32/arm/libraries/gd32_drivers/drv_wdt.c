@@ -24,24 +24,32 @@ typedef struct {
 } gd32_wdt_device_t;
 
 static gd32_wdt_device_t g_wdt_dev;
+static rt_uint32_t rcu_freq;
 
 static rt_err_t gd32_wdt_init(rt_watchdog_t *wdt)
 {
+#if defined (GD32F450) || defined (GD32F405) || defined (GD32F407) || defined (GD32F470) || defined (GD32F425) || defined (GD32F427)
+    rcu_osci_on(RCU_IRC32K);
+    rcu_freq = 32000;
+    if (ERROR == rcu_osci_stab_wait(RCU_IRC32K))
+#else
     rcu_osci_on(RCU_IRC40K);
+    rcu_freq = 40000;
     if (ERROR == rcu_osci_stab_wait(RCU_IRC40K))
+#endif
     {
         LOG_E("failed init IRC40K clock for free watchdog.");
         return -RT_EINVAL;
     }
 
     g_wdt_dev.min_threshold_s = 1;
-    g_wdt_dev.max_threshold_s = (0xfff << 8) / 40000;
+    g_wdt_dev.max_threshold_s = (0xfff << 8) / rcu_freq;
     LOG_I("threshold section [%u, %d]", \
         g_wdt_dev.min_threshold_s, g_wdt_dev.max_threshold_s);
 
-    fwdgt_write_enable();
-    fwdgt_config(0xfff, FWDGT_PSC_DIV256);
-    fwdgt_enable();
+    // fwdgt_write_enable();
+    // fwdgt_config(125, FWDGT_PSC_DIV256);
+    // fwdgt_enable();
 
     return 0;
 }
@@ -68,7 +76,7 @@ static rt_err_t gd32_wdt_control(rt_watchdog_t *wdt, int cmd, void *arg)
             g_wdt_dev.current_threshold_s = param;
         }
         fwdgt_write_enable();
-        fwdgt_config(param * 40000 >> 8, FWDGT_PSC_DIV256);
+        fwdgt_config((param * rcu_freq) >> 8, FWDGT_PSC_DIV256);
         fwdgt_write_disable();
         break;
     case RT_DEVICE_CTRL_WDT_GET_TIMEOUT:
@@ -102,7 +110,7 @@ static int rt_hw_wdt_init(void)
         LOG_E("wdt device register failed.");
         return -RT_ERROR;
     }
-    LOG_D("wdt device register success.");
+    LOG_I("wdt device register success.");
 
     return ret;
 }
