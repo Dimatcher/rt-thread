@@ -9,8 +9,6 @@
  */
 #include "drv_spi.h"
 
-#define RT_USING_SPI
-#define BSP_USING_SPI1
 #ifdef RT_USING_SPI
 
 #if defined(BSP_USING_SPI0) || defined(BSP_USING_SPI1) || defined(BSP_USING_SPI2) || defined(BSP_USING_SPI3) || defined(BSP_USING_SPI4) || defined(BSP_USING_SPI5)
